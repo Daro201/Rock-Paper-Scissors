@@ -1,70 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" >
+	<head>
+  		<meta charset="UTF-8">
+  		<title>Rock scissors paper</title>
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  		<link rel="stylesheet" href="css/style.css"> 
+	</head>
+	<body>
+  		<div class="round">
+      		<div class= "head">
+        		Results:
+      		</div>
+      		<div id="rounds"></div>
+  		</div>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Rock scissors paper</title>
-  
-  
-  
-      <link rel="stylesheet" href="css/style.css">
-
-  
-</head>
-
-<body>
-
-  <html lang="en" >
-
-<head>
-  <meta charset="UTF-8">
-  <title>Rock Paper Scissors</title>
-      <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  
-
-  <div class="round">
-      <div class= "head">
-        Results:
-      </div>
-      <div id="rounds">
-      </div>
-  </div>
-
-<div class="buttons">
-	<button id="button1" class="rock">Paper</button>
-  <button id="button2" class="scisors">Rock</button>
-  <button id="button3" class="paper"> Scissors</button>
-  <div id="output">
-  </div>
-  <div>
-  <button id="newGame">New Game</button>
-  </div>
-</div>
+		<div class="buttons">
+			<button id="button1" class="rock player-move" data-move="paper">Paper</button>
+  			<button id="button2" class="scisors player-move" data-move="rock">Rock</button>
+  			<button id="button3" class="paper player-move" data-move="scissors"> Scissors</button>
+  			<div id="output"></div>
+			<div>
+  				<button id="newGame">New Game</button>
+  			</div>
+		</div>
 
 
 
-<div class="endGame">
-    <div class= "headRounds">
-      Number Of Rounds
-    </div>
-    <div id="roundsNumber">
-    </div>
-</div>
+		<div class="endGame">
+      			Number Of Rounds
+    		<div id="roundsNumber"></div>
+		</div>
 
-    
-
-</body>
+ 		<script  src="js/index.js"></script>
+    </body>
 </html>
   
   
 
-    <script  src="js/index.js"></script>
+   
 
 
 
 
-</body>
-
-</html>

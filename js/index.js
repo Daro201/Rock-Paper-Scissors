@@ -29,8 +29,6 @@ var lottery = function() {
 }  
 
 
-
-
 /*new game function, that enables buttons after they were disabled, prompting new window, 
 checking the input and returning number of rounds player want to play */
  var newGame = function() {
@@ -113,8 +111,19 @@ var checkResults = function() {
 
 output.innerHTML = 'Click the button! If you want to start a game !' + '<br><br>' + output.innerHTML; 
 
+
+var buttons = document.getElementsByClassName('player-move');
+for (var i=0; i < buttons.length; i++) {
+buttons[i].addEventListener('click', function(){
+var attribute = this.getAttribute("data-move");
+output.innerHTML = checkWinner(attribute, lottery());
+checkResults();
+})
+}
+
  //buttons listeners for every playable button 
-paperButton.addEventListener('click', function(){
+
+/*paperButton.addEventListener('click', function(){
   
   output.innerHTML = checkWinner(PAPER, lottery());
   checkResults();
@@ -130,7 +139,7 @@ rockButton.addEventListener('click', function(){
 scissorsButton.addEventListener('click', function(){
   output.innerHTML = checkWinner(SCISSORS, lottery()); 
 checkResults();  
-}); 
+}); */
 
 //button listener initializing newGame function after cliking the button
   buttonNewGame.addEventListener('click', function(){
