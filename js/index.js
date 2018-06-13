@@ -1,13 +1,15 @@
 'use strict';
 
 //variables
-var PAPER = 'paper';
-var ROCK = 'rock';
-var SCISSORS = 'scissors';
-var playerWin = 0;
-var computerWin = 0;
-var round = 0;
-var numberRounds = 0;
+var params = { 
+PAPER: 'paper',
+ROCK: 'rock',
+SCISSORS: 'scissors',
+playerWin: 0,
+computerWin: 0,
+round: 0,
+numberRounds: 0,
+ }
 
 //gets buttons by id
 
@@ -22,11 +24,13 @@ var scissorsButton = document.getElementById('button3');
 var lottery = function() {
   var computerMove = Math.floor(Math.random() * 3) + 1;
   switch(computerMove) {
-    case 1: return PAPER;
-    case 2: return ROCK;
-    case 3: return SCISSORS;
+    case 1: return params.PAPER;
+    case 2: return params.ROCK;
+    case 3: return params.SCISSORS;
   }
 }  
+
+
 
 
 /*new game function, that enables buttons after they were disabled, prompting new window, 
@@ -34,20 +38,20 @@ checking the input and returning number of rounds player want to play */
  var newGame = function() {
   endGame();
   enabledButtons();
- numberRounds = window.prompt('How many rounds would you like to play? ', 'number');
-  if (!numberRounds || isNaN(numberRounds)){
+ params.numberRounds = window.prompt('How many rounds would you like to play? ', 'number');
+  if (!params.numberRounds || isNaN(params.numberRounds)){
     output.innerHTML = 'Incorrect number. Please try again';  
   } else {
-  roundsNumber.innerHTML = numberRounds;
-  return numberRounds;
+  roundsNumber.innerHTML = params.numberRounds;
+  return params.numberRounds;
   }  
 } 
 // function reseting the statistics, and clenaing the results
  var endGame = function() {
-  playerWin = 0;
-  computerWin = 0;
-  round = 0;
-  numberRounds = 0;
+  params.playerWin = 0;
+  params.computerWin = 0;
+  params.round = 0;
+  params.numberRounds = 0;
   
   output.innerHTML = ('');
   rounds.innerHTML = ('');
@@ -58,30 +62,30 @@ checking the input and returning number of rounds player want to play */
 function checkWinner(player, computer) {
 
   if (player === computer) {
-    round +=1;
+    params.round +=1;
     return 'It\'s draw: you played '+player+' , computer played '+computer+' !<br><br>';
   
   } else if (
-    player === PAPER && computer === ROCK ||
-    player === ROCK && computer === SCISSORS ||
-    player === SCISSORS && computer === PAPER
+    player === params.PAPER && computer === params.ROCK ||
+    player === params.ROCK && computer === params.SCISSORS ||
+    player === params.SCISSORS && computer === params.PAPER
   ) {
-    playerWin+=1;
-    round+=1;
+    params.playerWin+=1;
+    params.round+=1;
     return 'YOU WON: you played '+player+' , computer played '+computer+' !<br><br>';
   
   } else {
-    computerWin+=1;
-    round+=1;
+    params.computerWin+=1;
+    params.round+=1;
     return 'YOU LOST: you played '+player+' , computer played '+computer+' !<br><br>';
   }
 };
 
 var checkRounds = function() {
-  if (round == numberRounds ) {
-    if (computerWin > playerWin) {
+  if (params.round == params.numberRounds ) {
+    if (params.computerWin > params.playerWin) {
       output.innerHTML = 'YOU LOST! </br>';
-    } else if (computerWin === playerWin) {
+    } else if (params.computerWin === params.playerWin) {
         output.innerHTML ='IT IS A DRAW! </br>';
     } else {
         output.innerHTML ='YOU WON! </br>';   
@@ -105,7 +109,7 @@ var enabledButtons = function(){
 
   // function inputing results to site
 var checkResults = function() {
-  rounds.innerHTML =  "Number of rounds " + round +'<br> Player winning '+ playerWin + '<br>Computer winning '+computerWin;
+  rounds.innerHTML =  "Number of rounds " + params.round +'<br> Player winning '+ params.playerWin + '<br>Computer winning '+ params.computerWin;
   checkRounds();
 };
 
@@ -120,9 +124,9 @@ output.innerHTML = checkWinner(attribute, lottery());
 checkResults();
 })
 }
+ 
 
  //buttons listeners for every playable button 
-
 /*paperButton.addEventListener('click', function(){
   
   output.innerHTML = checkWinner(PAPER, lottery());
@@ -143,6 +147,7 @@ checkResults();
 
 //button listener initializing newGame function after cliking the button
   buttonNewGame.addEventListener('click', function(){
-  disabledButtons();
+  
   newGame();        
 });
+ 
