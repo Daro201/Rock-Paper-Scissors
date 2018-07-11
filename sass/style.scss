@@ -27,9 +27,7 @@ button {
   border-radius: 4px; 
 	transition: color .3s, background-color .3s;
   cursor: pointer;
-	/*outline: 0!important;*/
 	text-decoration: none;
-  /*touch-action: manipulation;*/
   user-select: none;
 	
 	&:hover, &:active {
@@ -63,7 +61,7 @@ button {
 
 .modal {
   background: #fff;
-  width: 200px;
+  width: 450px;
   position: absolute;
   top: 50%;
   left: 50%;

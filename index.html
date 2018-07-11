@@ -24,40 +24,66 @@
   			</div>
 		</div>
 
-
-
-
-
-<div class="overlay" id="modal-overlay">
-  <div class="modal" id="modal-one">
-    <a href="#" class="close">x</a>
-    <header>Modal one</header>
-    <div class="content">
-      <p>Dolor sit amet!</p>
+		<div class="overlay" id="win">
+      <div class="modal win">
+        <a href="#" id="data" class="close">x</a>
+        <header>You have won!</header>
+        <table cellspacing="10">
+          <thead>
+            <tr>
+              <th>Number of Rounds</th>
+              <th>Player Win</th>
+              <th>Computer Win</th>
+              <th>General Results</th>
+            </tr>
+          </thead>
+          <tbody id="body-win">
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="modal" id="modal-two">
-    <a href="#" class="close">x</a>
-    <header>Modal two</header>
-    <div class="content">
-      <p>Dolor sit amet!</p>
+
+    <div class="overlay" id="lost">
+      <div class="modal lost">
+        <a href="#" id="data" class="close">x</a>
+        <header>You have lost!</header>
+        <table cellspacing="10">
+          <thead>
+            <tr>
+              <th>Number of Rounds </th>
+              <th>Player Win </th>
+              <th>Computer Win </th>
+              <th>General Results </th>
+            </tr>
+          </thead>
+          <tbody id="body-lost">
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="modal" id="modal-three">
-    <a href="#" class="close">x</a>
-    <header>Modal three</header>
-    <div class="content">
-      <p>Dolor sit amet!</p>
+
+    <div class="overlay" id="draw">
+      <div class="modal draw">
+        <a href="#" id="data" class="close">x</a>
+        <header>It is a draw!</header>
+        <table cellspacing="10">
+          <thead>
+            <tr>
+              <th>Number of Rounds</th>
+              <th>Player Win</th>
+              <th>Computer Win</th>
+              <th>General Results</th>
+            </tr>
+          </thead>
+          <tbody id="body-draw">
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-</div>
-
-
-
 
 		<div class="endGame">
-      			Number Of Rounds
-    		<div id="roundsNumber"></div>
+      Number Of Rounds
+    	<div id="roundsNumber"></div>
 		</div>
 
  		<script  src="js/index.js"></script>

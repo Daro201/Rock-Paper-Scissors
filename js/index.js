@@ -9,18 +9,19 @@ playerWin: 0,
 computerWin: 0,
 round: 0,
 numberRounds: 0,
+progress: []
 }
 
-//gets buttons by id
 
+//gets buttons by id
 var buttonNewGame = document.getElementById('newGame');
 var output = document.getElementById('output');
 var paperButton = document.getElementById('button1');
 var rockButton = document.getElementById('button2');
 var scissorsButton = document.getElementById('button3');
 
-//function creating move of the computer
 
+//function creating move of the computer
 var lottery = function() {
 	var computerMove = Math.floor(Math.random() * 3) + 1;
 	switch(computerMove) {
@@ -30,7 +31,23 @@ var lottery = function() {
   	}
 };  
 
+//function adding show class and removing it 
+var showModal = function(choice) {
+    document.querySelector('#'+ choice).classList.add('show');
+    buildTable(choice);
+};
 
+var hideModal = function(choice) {
+    document.querySelector(choice).classList.remove('show');
+};
+
+var closeButtons = document.querySelectorAll('.modal');
+
+for (var i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].addEventListener('click', function(event) {
+        hideModal('#' + event.currentTarget.className.split(' ')[1]);
+    });
+}
 
 
 /*new game function, that enables buttons after they were disabled, prompting new window, 
@@ -47,6 +64,27 @@ var newGame = function() {
   	}  
 };
 
+
+var buildTable = function(choice) {
+  var table = document.querySelector('#body-'+ choice);
+  params.progress.forEach(function(progressResult) {
+    var row = document.createElement('tr');
+    table.appendChild(row);
+    for (var key in progressResult) {
+      tableCell(progressResult[key], row);
+    }
+  })
+};
+
+// this function build td in table
+var tableCell = function(value, row) {
+    var td = document.createElement('td');
+    td.innerHTML = value;
+    row.appendChild(td);
+
+};
+
+
 // function reseting the statistics, and clenaing the results
  var endGame = function() {
   params.playerWin = 0;
@@ -54,6 +92,7 @@ var newGame = function() {
   params.round = 0;
   params.numberRounds = 0;
   
+  params.progress = [];
   output.innerHTML = ('');
   rounds.innerHTML = ('');
   roundsNumber.innerHTML = ('');
@@ -80,15 +119,16 @@ function checkWinner(player, computer) {
 };
 // function showing the final result
 var checkRounds = function() {
-  if (params.round == params.numberRounds ) {
-    if (params.computerWin > params.playerWin) {
-      showModal();
-    } else if (params.computerWin === params.playerWin) {
-        showModal();
-    } else {
-        output.innerHTML ='YOU WON! </br>';   
-    }
-    disabledButtons();
+     if (params.round == params.numberRounds) {
+        if (params.computerWin === params.playerWin) { 
+            showModal('draw');
+        } else if (params.computerWin < params.playerWin) {
+            showModal('win');
+        } else {
+            showModal('lost');
+        }
+        disabledButtons();
+        
   }
 };
 
@@ -105,10 +145,11 @@ var enabledButtons = function(){
    	scissorsButton.disabled = false;
   };
 
-  // function inputing results to site
+// function inputing results to site
 var checkResults = function() {
   rounds.innerHTML =  "Number of rounds " + params.round +'<br> Player winning '+ params.playerWin + '<br>Computer winning '+ params.computerWin;
   checkRounds();
+
 };
 
 output.innerHTML = 'Click the button! If you want to start a game !' + '<br><br>' + output.innerHTML; 
@@ -119,79 +160,24 @@ var buttons = document.getElementsByClassName('player-move');
 		buttons[i].addEventListener('click', function(){
 		var attribute = this.getAttribute("data-move");
 		output.innerHTML = checkWinner(attribute, lottery());
-		checkResults();
+	
+    params.progress.push({
+      gameRounds: params.round,
+      gamePlayerMove: attribute,
+      gameComputerMove: lottery(),
+      finalResult: params.playerWin + ' - ' + params.computerWin
+
+    });
+    checkResults();
 	})
 }
  
 disabledButtons();
- //buttons listeners for every playable button 
-/*paperButton.addEventListener('click', function(){
-  
-  output.innerHTML = checkWinner(PAPER, lottery());
-  checkResults();
-  
-}); 
-
-rockButton.addEventListener('click', function(){
-  output.innerHTML = checkWinner(ROCK, lottery());
-  checkResults();
-  
-}); 
-  
-scissorsButton.addEventListener('click', function(){
-  output.innerHTML = checkWinner(SCISSORS, lottery()); 
-checkResults();  
-}); */
 
 //button listener initializing newGame function after cliking the button
   buttonNewGame.addEventListener('click', function(){
-  
   newGame();        
 });
  
 
 
-var showModal = function(event){
-		event.preventDefault();
-		document.querySelector('#modal-overlay').classList.add('show');
-     
-	};
-	
-	
-	var modalLinks = document.querySelectorAll('.show-modal');
-	
-	for(var i = 0; i < modalLinks.length; i++){
-		modalLinks[i].addEventListener('click', showModal);
-	}
-	
-
-
-	var hideModal = function(event){
-		event.preventDefault();
-		document.querySelector('#modal-overlay').classList.remove('show');
-    var modals = document.querySelectorAll('.modal');
-    
-    for (var i = 0; i < modals.length; i++) {
-        modals[i].classList.remove('show');
-    }
-	};
-	
-	var closeButtons = document.querySelectorAll('.modal .close');
-	
-	for(var i = 0; i < closeButtons.length; i++){
-		closeButtons[i].addEventListener('click', hideModal);
-	}
-	
-
-	
-	document.querySelector('#modal-overlay').addEventListener('click', hideModal);
-	
-
-	var modals = document.querySelectorAll('.modal');
-	
-	for(var i = 0; i < modals.length; i++){
-		modals[i].addEventListener('click', function(event){
-			event.stopPropagation();
-		});
-	}
- 
